@@ -1,0 +1,58 @@
+{
+  "name": "fs-visitor",
+  "version": "0.1.0",
+  "type": "module",
+  "description": "A Node.js library for recursively listing files and directories with customizable filtering and sorting options.",
+  "keywords": [
+    "file system",
+    "directory",
+    "listing",
+    "filtering",
+    "sorting",
+    "Node.js",
+    "fs",
+    "fs-extra",
+    "glob",
+    "fast-glob"
+  ],
+  "files": [
+    "dist",
+    "client.d.ts",
+    "LICENSE"
+  ],
+  "license": "MIT",
+  "author": "Willyams Yujra <yracnet@gmail.com>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yracnet/fs-visitor"
+  },
+  "main": "dist/main.js",
+  "module": "dist/main.cjs",
+  "types": "dist/main.d.ts",
+  "exports": {
+    ".": {
+      "require": "./dist/main.js",
+      "import": "./dist/main.cjs",
+      "types": "./dist/main.d.ts"
+    },
+    "./parse": {
+      "require": "./dist/parse.js",
+      "import": "./dist/parse.cjs",
+      "types": "./dist/parse.d.ts"
+    }
+  },
+  "homepage": "https://github.com/yracnet/fs-visitor",
+  "bugs": "https://github.com/yracnet/fs-visitor/issues",
+  "scripts": {
+    "build": "tsup",
+    "dev": "node --loader ts-node/esm ./test/basic.ts"
+  },
+  "dependencies": {},
+  "peerDependencies": {},
+  "devDependencies": {
+    "@types/node": "^18.11.15",
+    "ts-node": "^10.9.2",
+    "tsup": "^6.5.0",
+    "typescript": "^5.0.2"
+  }
+}
