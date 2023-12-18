@@ -1,6 +1,5 @@
-import { processVisitor } from "../src/main.ts";
-import { Entry } from "../src/types.ts";
-
+import { processVisitor, Entry } from "../src/main.ts";
+import { createFileEntry } from "../src/filter.ts";
 const test1 = () => {
   const result = processVisitor("test-dir", {
     filterEntry: (entry) => entry.type === "directory",
@@ -44,31 +43,34 @@ const test4 = () => {
   console.log("Test 4", result);
 };
 
-export const parseFilePatter = (filePatter: string) => {
-  filePatter = filePatter
-    .replace("**/", "__R0__")
-    .replace("*.", "__R1__")
-    .replace("*", "__R2__")
-    .replace(".", "__R3__")
-    .replace("__R0__", "(.*\\/)?")
-    .replace("__R1__", "[^.]+\\.")
-    .replace("__R2__", "[^\\/]+")
-    .replace("__R3__", "\\.");
-  const regExpString = `^${filePatter}$`;
-  const regExpRule = new RegExp(regExpString);
-  return (entry: Entry) => {
-    return regExpRule.test(entry.relative);
-  };
-};
-
 const test5 = () => {
   const result = processVisitor("test-dir", {
     relativePrefix: "virtual:/",
-    filterEntry: parseFilePatter("**/*File.css"),
+    filterEntry: createFileEntry({
+      include: "**/*File.css",
+      exclude: ["**/*2*/*", "**/*a/*"],
+    }),
   })
     .map((it) => it.relative)
     .sort();
   console.log("Test 5", result);
+};
+
+const test6 = () => {
+  const result = processVisitor("test-dir", {
+    relativePrefix: "virtual:/",
+    filterEntry: createFileEntry({
+      include: "**/dir1/**/*.css",
+    }),
+  })
+    .map((it) => {
+      return {
+        relative: it.relative,
+        content: it.readFileSync("utf-8"),
+      };
+    })
+    .sort();
+  console.log("Test 6", result);
 };
 
 test1();
@@ -76,3 +78,4 @@ test2();
 test3();
 test4();
 test5();
+test6();

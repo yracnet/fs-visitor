@@ -96,6 +96,7 @@ The main method that lists files and directories based on the provided options.
 ### Example 1: List All Files and Directories
 
 ```javascript
+import { processVisitor } from "fs-visitor";
 const entries = processVisitor("./");
 console.log(entries);
 ```
@@ -103,10 +104,29 @@ console.log(entries);
 ### Example 2: List TypeScript Files Only (Depth 2)
 
 ```javascript
-const tsFilter = (entry) => entry.type === "file" && entry.name.endsWith(".ts");
-const options = { deep: 2, filterEntry: tsFilter };
-const tsEntries = processVisitor("./src", options);
-console.log(tsEntries);
+import { processVisitor } from "fs-visitor";
+const entries = processVisitor("./src", {
+  deep: 2,
+  filterEntry: (entry) => {
+    return entry.type === "file" && entry.name.endsWith(".ts");
+  },
+});
+console.log(entries);
+```
+
+### Example 3: Include and Exclude
+
+This example use `minimatch` and expose a simple function `createFileEntry` in `filter` file
+
+```javascript
+import { processVisitor } from "fs-visitor";
+import { createFileEntry } from "fs-visitor/filter";
+const filterEntry = createFileEntry({
+  include: "**/*.ts",
+  exclude: ["**/Config*", "**/Defined*"],
+});
+const entries = processVisitor("./src/widget", { filterEntry });
+console.log(entries);
 ```
 
 Feel free to contribute to this project, report issues, or suggest improvements. Your feedback is highly appreciated.
