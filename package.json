@@ -1,6 +1,6 @@
 {
   "name": "fs-visitor",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "type": "module",
   "description": "A Node.js library for recursively listing files and directories with customizable filtering and sorting options.",
   "keywords": [
@@ -31,14 +31,14 @@
   "types": "dist/main.d.ts",
   "exports": {
     ".": {
-      "require": "./dist/main.js",
+      "types": "./dist/main.d.ts",
       "import": "./dist/main.cjs",
-      "types": "./dist/main.d.ts"
+      "require": "./dist/main.js"
     },
     "./filter": {
-      "require": "./dist/filter.js",
+      "types": "./dist/filter.d.ts",
       "import": "./dist/filter.cjs",
-      "types": "./dist/filter.d.ts"
+      "require": "./dist/filter.js"
     }
   },
   "homepage": "https://github.com/yracnet/fs-visitor",
