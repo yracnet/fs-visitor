@@ -59,7 +59,7 @@ describe("processVisitor Tests", () => {
     const doItem = ({ name, relative, children = [] }: EntryBase) => {
       return {
         name,
-        relative,
+        virtual: relative,
         children: children.map(doItem),
       };
     };
@@ -73,36 +73,36 @@ describe("processVisitor Tests", () => {
     const resultData = [
       {
         name: "",
-        relative: "virtual:/",
+        virtual: "virtual:/",
         children: [
           {
             name: "dir1",
-            relative: "virtual:/dir1",
+            virtual: "virtual:/dir1",
             children: [
               {
                 name: "prefixFile.css",
-                relative: "virtual:/dir1/prefixFile.css",
+                virtual: "virtual:/dir1/prefixFile.css",
                 children: [],
               },
               {
                 name: "subdir1a",
-                relative: "virtual:/dir1/subdir1a",
+                virtual: "virtual:/dir1/subdir1a",
                 children: [],
               },
             ],
           },
           {
             name: "dir2",
-            relative: "virtual:/dir2",
+            virtual: "virtual:/dir2",
             children: [
               {
                 name: "prefixFile.css",
-                relative: "virtual:/dir2/prefixFile.css",
+                virtual: "virtual:/dir2/prefixFile.css",
                 children: [],
               },
               {
                 name: "subdir2a",
-                relative: "virtual:/dir2/subdir2a",
+                virtual: "virtual:/dir2/subdir2a",
                 children: [],
               },
             ],
