@@ -26,9 +26,6 @@
     "type": "git",
     "url": "https://github.com/yracnet/fs-visitor"
   },
-  "main": "dist/main.js",
-  "module": "dist/main.cjs",
-  "types": "dist/main.d.ts",
   "exports": {
     ".": {
       "types": "./dist/main.d.ts",
