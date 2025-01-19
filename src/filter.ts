@@ -1,26 +1,16 @@
-import { Entry } from "./main";
+import { EntryFS } from "./model.ts";
 import { minimatch } from "minimatch";
 
-type FileEntryOpts = {
+type FilterOpts = {
   include: string | string[];
   exclude?: string | string[];
 };
-export const createFileEntry = (opts: FileEntryOpts) => {
-  const includeList = Array.isArray(opts.include)
-    ? opts.include
-    : [opts.include];
-  const excludeList = Array.isArray(opts.exclude)
-    ? opts.exclude
-    : opts.exclude
-    ? [opts.exclude]
-    : [];
-  return (entry: Entry) => {
-    const included = includeList.some((pattern) =>
-      minimatch(entry.relative, pattern)
-    );
-    const excluded = excludeList.some((pattern) =>
-      minimatch(entry.relative, pattern)
-    );
-    return included && !excluded;
+export const createFileEntry = ({ include = [], exclude = [] }: FilterOpts) => {
+  const includeList = Array.isArray(include) ? include : [include];
+  const excludeList = Array.isArray(exclude) ? exclude : [exclude];
+  return (entry: EntryFS) => {
+    const isIncluded = includeList.some((pattern) => minimatch(entry.relative, pattern));
+    const isExcluded = excludeList.some((pattern) => minimatch(entry.relative, pattern));
+    return isIncluded && !isExcluded;
   };
 };

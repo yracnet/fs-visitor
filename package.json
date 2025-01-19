@@ -1,6 +1,6 @@
 {
   "name": "fs-visitor",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "type": "module",
   "description": "A Node.js library for recursively listing files and directories with customizable filtering and sorting options.",
   "keywords": [
@@ -42,13 +42,15 @@
   "scripts": {
     "prepublish": "tsup",
     "build": "tsup",
-    "dev": "node --loader ts-node/esm ./test/basic.ts"
+    "test": "vitest"
   },
   "dependencies": {},
   "peerDependencies": {
     "minimatch": "^9.0.3"
   },
   "devDependencies": {
+    "@vitest/ui": "^3.0.2",
+    "vitest": "^3.0.2",
     "@types/node": "^18.11.15",
     "minimatch": "^9.0.3",
     "ts-node": "^10.9.2",
