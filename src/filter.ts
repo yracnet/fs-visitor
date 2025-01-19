@@ -1,4 +1,4 @@
-import { EntryFS } from "./model.ts";
+import { EntryBase } from "./model.ts";
 import { minimatch } from "minimatch";
 
 type FilterOpts = {
@@ -8,7 +8,7 @@ type FilterOpts = {
 export const createFileEntry = ({ include = [], exclude = [] }: FilterOpts) => {
   const includeList = Array.isArray(include) ? include : [include];
   const excludeList = Array.isArray(exclude) ? exclude : [exclude];
-  return (entry: EntryFS) => {
+  return (entry: EntryBase) => {
     const isIncluded = includeList.some((pattern) => minimatch(entry.relative, pattern));
     const isExcluded = excludeList.some((pattern) => minimatch(entry.relative, pattern));
     return isIncluded && !isExcluded;

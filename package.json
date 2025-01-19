@@ -1,6 +1,6 @@
 {
   "name": "fs-visitor",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "type": "module",
   "description": "A Node.js library for recursively listing files and directories with customizable filtering and sorting options.",
   "keywords": [

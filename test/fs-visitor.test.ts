@@ -55,7 +55,22 @@ describe("processVisitor Tests", () => {
     expect(result).toEqual(["virtual:/dir1/prefixFile.css", "virtual:/dir2/prefixFile.css"]);
   });
 
-  it("Test 5: Tree Files", () => {
+  it("Test 5: Filter by name prefix and relativePrefix", () => {
+    const result = processVisitor(baseDir, {
+      filterEntry: createFileEntry({
+        include: "**/*.css",
+        exclude: "**/dir2/**",
+      }),
+      relativePrefix: "virtual:/",
+    })
+      .map((it) => it.relative)
+      .sort();
+
+    expect(result.length).toBe(1);
+    expect(result).toEqual(["virtual:/dir1/prefixFile.css"]);
+  });
+
+  it("Test 6: Tree Files", () => {
     const doItem = ({ name, relative, children = [] }: EntryBase) => {
       return {
         name,
