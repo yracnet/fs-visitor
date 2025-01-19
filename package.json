@@ -27,9 +27,9 @@
   },
   "exports": {
     ".": {
-      "types": "./dist/main.d.ts",
-      "import": "./dist/main.js",
-      "require": "./dist/main.cjs"
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
     },
     "./filter": {
       "types": "./dist/filter.d.ts",
