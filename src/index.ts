@@ -1,9 +1,11 @@
 import fs from "fs";
 import path from "path";
-import { assertConfig, Config, EntryFS, EntryBase, Options, EntryCallback } from "./model.ts";
+import { assertConfig, Config, EntryFS, EntryBase, Options, CallbackEntry, SorterEntry, FilterEntry } from "./model.ts";
 import { createAppendFileSync, createErrorDirectory, createReadFileSync, createWriteFileSync } from "./utils.ts";
 
-const processEntries = (parent: EntryFS, config: Config, entryCallback: EntryCallback) => {
+export type { EntryFS, EntryBase, Options, SorterEntry, FilterEntry };
+
+const processEntries = (parent: EntryFS, config: Config, entryCallback: CallbackEntry) => {
   const nextLevel = parent.level + 1;
   if (nextLevel > config.deep) {
     return;

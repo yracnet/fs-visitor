@@ -33,16 +33,18 @@ export type EntryFS = EntryBase & {
   appendFileSync: AppendFileSync;
 };
 
+export type SorterEntry = (a: EntryBase, b: EntryBase) => number;
+
 export type FilterEntry = (entry: EntryBase) => boolean;
 
-export type EntryCallback = (current: EntryFS, parent: EntryFS) => void;
+export type CallbackEntry = (current: EntryFS, parent: EntryFS) => void;
 
 export type Config = {
   cwd: string;
   deep: number;
   filterEntry: FilterEntry[];
   withDirectory: boolean;
-  sorter: (a: EntryFS, b: EntryFS) => number;
+  sorter: SorterEntry;
   relativePrefix: string;
   useSlash: boolean;
   asTree: boolean;
@@ -53,7 +55,7 @@ export type Options = {
   deep?: number;
   filterEntry?: FilterEntry | FilterEntry[];
   withDirectory?: boolean;
-  sorter?: (a: EntryFS, b: EntryFS) => number;
+  sorter?: SorterEntry;
   relativePrefix?: string;
   useSlash?: boolean;
   asTree?: boolean;
