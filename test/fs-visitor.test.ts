@@ -127,4 +127,15 @@ describe("processVisitor Tests", () => {
     ];
     expect(result).toEqual(resultData);
   });
+
+  it("Test 7: Check keys", () => {
+    const result = processVisitor(baseDir, {
+      filterEntry: (entry) => entry.type === "directory",
+      withDirectory: true,
+    })
+      .map((it) => it.key)
+      .sort();
+    expect(result.length).toBe(4);
+    expect(result).toEqual(["R.1", "R.1.1", "R.2", "R.2.1"]);
+  });
 });

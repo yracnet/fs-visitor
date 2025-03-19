@@ -11,12 +11,13 @@ const processEntries = (parent: EntryFS, config: Config, entryCallback: Callback
     return;
   }
   fs.readdirSync(parent.absolute, { withFileTypes: true })
-    .map<EntryBase>((entry) => {
+    .map<EntryBase>((entry, ix) => {
       const name = entry.name;
       const type = entry.isDirectory() ? "directory" : entry.isFile() ? "file" : "";
       const absolute = path.join(parent.absolute, name);
       const relative = path.join(parent.relative, name);
       return {
+        key: "",
         level: nextLevel,
         type,
         name,
@@ -39,9 +40,11 @@ const processEntries = (parent: EntryFS, config: Config, entryCallback: Callback
         config.filterEntry.some((filterCallback) => filterCallback(current))
       );
     })
-    .map<EntryFS>((currentBase) => {
+    .map<EntryFS>((currentBase, ix) => {
+      const key = `${parent.key}.${ix + 1}`;
       return {
         ...currentBase,
+        key,
         readFileSync: createReadFileSync(currentBase),
         writeFileSync: createWriteFileSync(currentBase),
         appendFileSync: createAppendFileSync(currentBase),
@@ -64,6 +67,7 @@ export const processVisitor = (directory: string, opts: Options = {}): EntryFS[]
   const result: EntryFS[] = [];
   const errorRoot = createErrorDirectory("root");
   const root: EntryFS = {
+    key: "R",
     level: 0,
     name: "",
     type: "directory",

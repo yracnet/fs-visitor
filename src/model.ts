@@ -19,6 +19,7 @@ export type WriteFileSync = (data: string | NodeJS.ArrayBufferView, options?: Wr
 export type AppendFileSync = (data: string | Uint8Array, options?: WriteFileOptions) => void;
 
 export type EntryBase = {
+  key: string;
   type: "directory" | "file" | string;
   name: string;
   level: number;
