@@ -41,6 +41,7 @@ console.log(tsEntries);
 
 ```typescript
 type Entry = {
+  key: string;
   type: "directory" | "file" | string;
   name: string;
   absolute: string;
