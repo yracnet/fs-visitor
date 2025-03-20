@@ -67,7 +67,7 @@ export const processVisitor = (directory: string, opts: Options = {}): EntryFS[]
   const result: EntryFS[] = [];
   const errorRoot = createErrorDirectory("root");
   const root: EntryFS = {
-    key: "R",
+    key: config.keyPrefix,
     level: 0,
     name: "",
     type: "directory",

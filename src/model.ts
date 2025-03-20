@@ -47,6 +47,7 @@ export type Config = {
   withDirectory: boolean;
   sorter: SorterEntry;
   relativePrefix: string;
+  keyPrefix: string;
   useSlash: boolean;
   asTree: boolean;
 };
@@ -58,6 +59,7 @@ export type Options = {
   withDirectory?: boolean;
   sorter?: SorterEntry;
   relativePrefix?: string;
+  keyPrefix?: string;
   useSlash?: boolean;
   asTree?: boolean;
 };
@@ -66,6 +68,7 @@ export const assertConfig = ({
   cwd = process.cwd(),
   deep = Infinity,
   relativePrefix = "",
+  keyPrefix = "R",
   useSlash = true,
   withDirectory = false,
   asTree = false,
@@ -79,6 +82,7 @@ export const assertConfig = ({
     cwd,
     deep,
     relativePrefix,
+    keyPrefix,
     useSlash,
     asTree,
     withDirectory,

@@ -138,4 +138,16 @@ describe("processVisitor Tests", () => {
     expect(result.length).toBe(4);
     expect(result).toEqual(["R.1", "R.1.1", "R.2", "R.2.1"]);
   });
+
+  it("Test 8: Check keyPrefix", () => {
+    const result = processVisitor(baseDir, {
+      filterEntry: (entry) => entry.type === "directory",
+      withDirectory: true,
+      keyPrefix: "XXX",
+    })
+      .map((it) => it.key)
+      .sort();
+    expect(result.length).toBe(4);
+    expect(result).toEqual(["XXX.1", "XXX.1.1", "XXX.2", "XXX.2.1"]);
+  });
 });
